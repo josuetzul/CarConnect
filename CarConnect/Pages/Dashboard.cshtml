@@ -1,0 +1,54 @@
+﻿@page
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize(Policy = "VentasOnly")]
+@model CarConnect.Pages.DashboardModel
+@{
+	ViewData["Title"] = "Dashboard";
+}
+<header>
+    <h1>Citas Pendientes</h1>
+    <div class="buttons">
+        <button id="buttonClose">Citas Cercanas</button>
+        <button id="buttonPast">Citas Pasadas</button>
+        <button id="buttonFuture">Citas Futuras</button>
+    </div>
+</header>
+<div id="content">
+    <div id="citasHoy" class="citas-section">
+        <h2>Citas Hoy</h2>
+        <p>No hay citas registradas para hoy.</p>
+    </div>
+    <div id="citasManiana" class="citas-section">
+        <h2>Citas Mañana</h2>
+        <p>No hay citas registradas para mañana.</p>
+    </div>
+</div>
+<div id="contentWithButtons"></div>
+
+@section Scripts{
+    <script src="~/js/salesDashboard.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // Elementos específicos del DOM
+            const buttonClose = document.getElementById("buttonClose");
+            const buttonPast = document.getElementById("buttonPast");
+            const buttonFuture = document.getElementById("buttonFuture");
+
+            const content = document.getElementById("content");
+            const contentWithButtons = document.getElementById("contentWithButtons");
+
+            buttonClose.addEventListener("click", () => {
+                contentWithButtons.style.display = "none";
+                content.style.display = "block";
+
+            });buttonPast.addEventListener("click", () => {
+                content.style.display = "none";
+                contentWithButtons.style.display = "block";
+            });
+            buttonFuture.addEventListener("click", () => {
+                content.style.display = "none";
+                contentWithButtons.style.display = "block";
+            });
+        });
+    </script>
+}

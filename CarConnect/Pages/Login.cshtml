@@ -1,0 +1,30 @@
+﻿@page
+@model CarConnect.Pages.LoginModel
+@{
+    ViewData["Title"] = "Login";
+}
+
+<h2>Login</h2>
+
+<form method="post">
+    <div>
+        <label for="username">Username:</label>
+        <input type="text" id="username" asp-for="Username" />
+    </div>
+    <div>
+        <label for="password">Password:</label>
+        <input type="password" id="password" asp-for="Password" />
+    </div>
+    <button type="submit">Login</button>
+</form>
+
+@if (!string.IsNullOrEmpty(Model.ErrorMessage))
+{
+    <p style="color: red;">@Model.ErrorMessage</p>
+}
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const contactButton = document.getElementById("Contact-btn");
+        contactButton.style.display = "none";
+    });
+</script>

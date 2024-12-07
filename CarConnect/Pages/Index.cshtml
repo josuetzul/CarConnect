@@ -1,0 +1,45 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "CarConnect";
+}
+
+<div id="indexHTML" class="text-center">
+    <h1>¡Bienvenido a Concesionario Car Connect!</h1>
+    <p>Encuentra los mejores vehículos al mejor precio. Calidad y confianza en cada compra.</p>
+    <div id="aboutUsContainer">
+        <h3>Sobre Nosotros</h3>
+        <div class="aboutUsIndividuals"><p><b>Misión</b></p> <p>Conectarte con tu nuevo vehículo</p> </div>
+        <div class="aboutUsIndividuals"><p><b>Visión</b></p> <p>Ser el mejor concesionario del país</p> </div>
+        <div class="aboutUsIndividuals"><p><b>Valores</b></p> <p>Servicio agradable. Excelencia. Integridad</p> </div>
+    </div>
+    <a href="/search" class="search-button">Ver Catálogo</a>
+</div>
+<footer style="background-color: #f8f9fa; padding: 20px; border-top: 1px solid #ddd;">
+    <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center;">
+
+        <!-- Logo -->
+        <div style="flex: 1; text-align: center; margin-bottom: 10px;">
+            <a href="/Index">
+                <img src="logo.png" alt="Logo" style="max-height: 50px;">
+            </a>
+        </div>
+
+        <!-- Contact Information -->
+        <div style="flex: 2; text-align: center; margin-bottom: 10px;">
+            <p style="margin: 0; font-size: 1.2em; font-weight: bold;">Contáctenos</p>
+
+            <!-- Phone Button -->
+            <button style="margin-top: 10px; padding: 10px 20px; font-size: 1em; background-color: #007bff; color: #fff; border: none; border-radius: 5px; cursor: pointer;"
+                    onclick="window.location.href='tel:+1234567890'">
+                Llamar: +1 234 567 890
+            </button>
+
+            <!-- Email -->
+            <p style="margin-top: 15px; font-size: 1em; color: #555;">
+                Correo electrónico: <a href="mailto:contacto@concesionario.com" style="color: #007bff;">contacto@concesionario.com</a>
+            </p>
+        </div>
+    </div>
+</footer>
+

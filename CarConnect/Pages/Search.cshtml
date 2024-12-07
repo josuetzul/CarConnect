@@ -1,0 +1,104 @@
+﻿@page
+@model CarConnect.Pages.SearchModel
+@{
+    ViewData["Title"] = "Búsqueda de carrros";
+}
+<script>
+    // Limpia los filtros al cargar la página
+    window.addEventListener("load", () => {
+        document.getElementById("filterForm").reset();
+    });
+</script>
+<h1>Búsqueda de Carros</h1>
+<form id="filterForm" method="get">
+    <select asp-for="CarType" asp-items="Model.Types">
+        <option value="">All</option>
+    </select>
+    <select asp-for="CarTier" asp-items="Model.Tiers">
+        <option value="">All</option>
+    </select> 
+    <select asp-for="CarState" asp-items="Model.States">
+        <option value="">All</option>
+    </select>
+    <input type="text" name="query" placeholder="Nombre del carro" />
+    <button type="submit">Buscar</button>
+</form>
+
+<div>
+    @if (!string.IsNullOrEmpty(Model.ErrorMessage))
+    {
+    <div style="color: red;">
+        <p>@Model.ErrorMessage</p>
+    </div>
+    }
+    else if (Model.Cars != null && Model.Cars.Count > 0)
+    {
+        <ul id="carList">
+            @foreach (var car in Model.Cars)
+            {
+                <li class="car-item" data-id="@car.Id" data-name="@car.Name" data-description="@car.Description"
+                    data-color="@car.Color" data-type="@car.Type" data-tier="@car.Tier" data-state="@car.State">
+                    @car.Name - @car.Id
+                </li>
+            }
+        </ul>
+
+        <!-- Contenedor dinámico para mostrar información del carro -->
+        <div id="carInfoContainer" style="display: none; border: 1px solid #ccc; padding: 10px; margin-top: 20px;">
+            <h3>Información del Carro</h3>
+            <p id="carInfoContent"></p>
+
+            <button id="createAppointmentButton">Agendar Cita</button>
+            <div id="createAppointmentFormContainer" style="display: none;">
+                <h3>Crear cita</h3>
+                <form id="createAppointmentForm">
+                    <label for="nameComprador">Nombre:</label>
+                    <input type="text" id="nameComprador" name="nameComprador" required/>
+
+                    <label for="phoneComprador">Teléfono:</label>
+                    <input type="text" id="phoneComprador" name="phoneComprador" required/>
+
+                    <label for="fechaCita">Fecha:</label>
+                    <input type="date" id="fechaCita" name="fechaCita" min="${new Date().toISOString().split('T')[0]}" required />
+
+                    <button type="submit" class="btn btn-primary">Confirmar Cita</button>
+                </form>
+            </div>
+        </div>
+    }
+    else
+    {
+        <p>No se encontraron resultados.</p>
+    }
+</div>
+<footer style="background-color: #f8f9fa; padding: 20px; border-top: 1px solid #ddd;">
+    <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center;">
+
+        <!-- Logo -->
+        <div style="flex: 1; text-align: center; margin-bottom: 10px;">
+            <a href="/Index">
+                <img src="logo.png" alt="Logo" style="max-height: 50px;">
+            </a>
+        </div>
+
+        <!-- Contact Information -->
+        <div style="flex: 2; text-align: center; margin-bottom: 10px;">
+            <p style="margin: 0; font-size: 1.2em; font-weight: bold;">Contáctenos</p>
+
+            <!-- Phone Button -->
+            <button style="margin-top: 10px; padding: 10px 20px; font-size: 1em; background-color: #007bff; color: #fff; border: none; border-radius: 5px; cursor: pointer;"
+                    onclick="window.location.href='tel:+1234567890'">
+                Llamar: +1 234 567 890
+            </button>
+
+            <!-- Email -->
+            <p style="margin-top: 15px; font-size: 1em; color: #555;">
+                Correo electrónico: <a href="mailto:contacto@concesionario.com" style="color: #007bff;">contacto@concesionario.com</a>
+            </p>
+        </div>
+    </div>
+</footer>
+
+@section Scripts {
+<script src="~/js/search.js"></script>
+}
